@@ -8,7 +8,6 @@ import variables as v
 def prompt():
     print(f"""
     The quality is set to: {v.QUALITY}p
-    It Contains: {v.TOTAL_SEASONS} Seasons
     The tvSeriesid is: {v.TV_ID}
     """)
 
@@ -26,15 +25,10 @@ def print_series_data(series_json: dict):
     print("\n")
 
 
-def get_season_count(series_json_data):
-    return len(series_json_data["seasons"][v.QUALITY])
-
-
-def print_extract_links(series_json: dict, token):
+def print_extract_links(json_seasons: dict, token):
     # Looping for total_seasons and generating downloadable links with token attached
-    seasons = get_season_count(series_json)
-    for season_no in range(1, seasons + 1):
-        season = series_json["seasons"][v.QUALITY][str(season_no)]["episodes"]
+    for season_no in range(1, len(json_seasons) + 1):
+        season = json_seasons[str(season_no)]["episodes"]
 
         links = list()
 

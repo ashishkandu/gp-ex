@@ -37,9 +37,9 @@ def run(token):
             print(response.json())
 
     # Getting the series details, e.g. no. of seasons, all episodes
-    series_response_json = series_response.json()
-    print_series_data(series_response_json) # Printing the name of the series and year
-    print_extract_links(series_response_json, token) # NEED TO WORK ON THIS !!!!
+    response_json_seasons = series_response.json()["seasons"][v.QUALITY]
+    print_series_data(series_json=series_response.json()) # Printing the name of the series and year
+    print_extract_links(response_json_seasons, token) # NEED TO WORK ON THIS !!!!
 
 if __name__ == '__main__':
     run(token=cache_token)
