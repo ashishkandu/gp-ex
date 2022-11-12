@@ -7,7 +7,6 @@ import variables as v
 # Prompt for confirmation on above series config
 def prompt():
     print(f"""
-    The quality is set to: {v.QUALITY}p
     The tvSeriesid is: {v.TV_ID}
     """)
 
@@ -24,6 +23,19 @@ def print_series_data(series_json: dict):
     print(f"{series_json['name']} ({series_json['imdbData']['Year']})")
     print("\n")
 
+
+def confirm_quality(series_json):
+    for index, q in enumerate(series_json["quality"], start=1): print(f'{index}. {q}')
+    while True:
+        try:
+            choice = int(input('\nPlease choose the quality: '))
+            if choice > len(series_json["quality"]): 
+                print("Please choose from above option!")
+                continue
+        except ValueError:
+            print("Please enter numbers only...")
+        else:
+            return series_json["quality"][choice - 1]
 
 def print_extract_links(json_seasons: dict, token):
     # Looping for total_seasons and generating downloadable links with token attached

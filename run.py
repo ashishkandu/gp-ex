@@ -36,9 +36,13 @@ def run(token):
             print("auth error occured!")
             print(response.json())
 
+    response_json_series = series_response.json() # Getting the series response in json format
+
+    quality = confirm_quality(response_json_series)
+    response_json_seasons = response_json_series["seasons"][quality]
+
     # Getting the series details, e.g. no. of seasons, all episodes
-    response_json_seasons = series_response.json()["seasons"][v.QUALITY]
-    print_series_data(series_json=series_response.json()) # Printing the name of the series and year
+    print_series_data(series_json=response_json_series) # Printing the name of the series and year
     print_extract_links(response_json_seasons, token) # NEED TO WORK ON THIS !!!!
 
 if __name__ == '__main__':

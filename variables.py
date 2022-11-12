@@ -1,5 +1,4 @@
 # Series config
-QUALITY = "1080"
 TV_ID = "1399"
 
 # Movies not supported yet !!!!!!!!
