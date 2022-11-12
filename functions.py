@@ -49,6 +49,7 @@ def print_series_data(series_json: dict):
 
 
 def confirm_quality(series_json):
+    print("\nAvailable quality: ")
     for index, q in enumerate(series_json["quality"], start=1): print(f'{index}. {q}')
     while True:
         try:
