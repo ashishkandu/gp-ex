@@ -3,7 +3,7 @@ import variables as v
 
 class Mysession:
     def __init__(self) -> None:
-        self.s = requests.Session()
+        self.s = requests.Session() # Session Objects get created
         self.s.headers = {
             'sec-ch-ua': '"Google Chrome";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
             'Accept': 'application/json, text/plain, */*',

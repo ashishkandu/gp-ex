@@ -1,7 +1,3 @@
-
-# To get new token set it to True
-REFRESH = False
-
 # Series config
 QUALITY = "1080"
 TOTAL_SEASONS = 8
