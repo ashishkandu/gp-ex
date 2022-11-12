@@ -25,9 +25,15 @@ def print_series_data(series_json: dict):
     print(f"{series_json['name']} ({series_json['imdbData']['Year']})")
     print("\n")
 
+
+def get_season_count(series_json_data):
+    return len(series_json_data["seasons"][v.QUALITY])
+
+
 def print_extract_links(series_json: dict, token):
     # Looping for total_seasons and generating downloadable links with token attached
-    for season_no in range(1, v.TOTAL_SEASONS + 1):
+    seasons = get_season_count(series_json)
+    for season_no in range(1, seasons + 1):
         season = series_json["seasons"][v.QUALITY][str(season_no)]["episodes"]
 
         links = list()
