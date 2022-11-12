@@ -13,7 +13,7 @@ class Mysession:
             'sec-ch-ua-platform': '"Linux"',
         }
 
-    def login(self, username, password) -> requests.session:
+    def login(self, username, password):
         json_data = {
             'email': username,
             'password': password,

@@ -7,7 +7,7 @@ import variables as v
 # Prompt for confirmation on above series config
 def prompt():
     print(f"""
-    The quality is set to: {v.QUALITY}
+    The quality is set to: {v.QUALITY}p
     It Contains: {v.TOTAL_SEASONS} Seasons
     The tvSeriesid is: {v.TV_ID}
     """)
