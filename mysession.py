@@ -1,5 +1,6 @@
 import requests
 import variables as v
+from urllib.parse import quote
 
 class Mysession:
     def __init__(self) -> None:
@@ -28,3 +29,7 @@ class Mysession:
 
     def getMethod(self, get_url):
         return self.s.get(get_url)
+
+    def searchby_keyword(self, search_url, keyword):
+        search_url_with_keyword = f'{search_url}/{quote(keyword)}'
+        return self.s.get(search_url_with_keyword)

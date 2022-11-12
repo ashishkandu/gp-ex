@@ -2,16 +2,41 @@ import variables as v
 # For reference a standard link would look like:
 # api_url/NAME/?id=_ID&token=TOKEN
 
+def search_input():
+    while True:
+        user_input = input("\nSearch for... ")
+        if user_input == "":
+            print("Cannot be empty!")
+            continue
+        return user_input
 
-# Prompt for confirmation on above series config
-def prompt():
-    print(f"""
-    The tvSeriesid is: {v.TV_ID}
-    """)
 
-    user_input = input("Press enter to continue...")
-    if user_input != "":
-        raise SystemExit("Quitting")
+def print_search_results(search_results_json):
+    results_len = len(search_results_json)
+    if results_len == 0:
+        raise SystemExit("Nothing found!")
+    if results_len == 1:
+        return search_results_json[0]["id"]
+    print("\n")
+    for index, items in enumerate(search_results_json, start=1):
+        print(f'{index}. {items["title"]} - {items["id"]}')
+        print()
+        print(items["overview"])
+        print(f'To check the poster -> {items["poster_path"]}')
+        print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n")
+    while True:
+        try:
+            choice = int(input('\nPlease choose the result: '))
+            if choice > results_len:
+                print("Please choose from above option!")
+                continue
+        except ValueError:
+            print("Please enter numbers only...")
+        except KeyboardInterrupt:
+            raise SystemExit("Quit!")
+        else:
+            return search_results_json[choice - 1]["id"]
+
 
 def add_bearer_to_token(token):
     return "Bearer " + token
@@ -33,6 +58,8 @@ def confirm_quality(series_json):
                 continue
         except ValueError:
             print("Please enter numbers only...")
+        except KeyboardInterrupt:
+            raise SystemExit("Quit!")
         else:
             return series_json["quality"][choice - 1]
 

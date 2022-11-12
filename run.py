@@ -11,30 +11,35 @@ my_password = os.getenv('PASSWORD')
 cache_token = os.getenv('TOKEN')
 
 def run(token):
-    prompt() # A prompt for confirmation of variables set
     session = Mysession() # Create a session
 
     session.update_parameter({'Authorization': add_bearer_to_token(token)})
-    series_response = session.getMethod(v.FETCH_TV_SERIES) 
+    # series_response = session.getMethod(v.FETCH_TV_SERIES)
+    print("Verifying token...")
+    response = session.getMethod(v.HOME_API) # Check the status of cache_token
 
-    if not series_response.ok:
-        print(series_response.json())
+    if not response.ok:
+        print(response.json())
         session.remove_parameter('Authorization')
         # To get new token
+        print("Getting new token...")
         response = session.login(my_id, my_password)  
         if response.ok:
             token = response.json()['token']
             # Set the new token to env variables
             set_key(dotenv_file, "TOKEN", token)
-
             session.update_parameter({'Authorization': add_bearer_to_token(token)})
-
-            # Calling once more 
-            series_response = session.getMethod(v.FETCH_TV_SERIES) 
+            
             # Debug : Below 3 lines
         else:
             print("auth error occured!")
             print(response.json())
+
+    
+    search_result_response = session.searchby_keyword(v.SEARCH_API, search_input())
+    tv_id = print_search_results(search_result_response.json())
+
+    series_response = session.getMethod(f'{v.FETCH_TV_SERIES}/{tv_id}')
 
     response_json_series = series_response.json() # Getting the series response in json format
 
