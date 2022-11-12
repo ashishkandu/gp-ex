@@ -66,14 +66,14 @@ def confirm_quality(series_json):
 
 def print_extract_links(json_seasons: dict, token):
     # Looping for total_seasons and generating downloadable links with token attached
-    for season_no in range(1, len(json_seasons) + 1):
-        season = json_seasons[str(season_no)]["episodes"]
+    for season in json_seasons:
+        episodes = json_seasons[season]["episodes"]
 
         links = list()
 
-        for episode in season:
+        for episode in episodes:
             formatted_link = f'{v.DOWNLOAD_API}/{episode["name"]}?id={episode["_id"]}&token={token}'
             links.append(formatted_link)
-        print(f"Season {season_no}:\n")
+        print(f"Season {season}:\n")
         print(links)
         print("\n\n")
