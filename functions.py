@@ -45,8 +45,7 @@ def add_bearer_to_token(token):
 
 def print_series_data(series_json: dict):
     print("\n")
-    print(f"{series_json['name']} ({series_json['imdbData']['Year']})")
-    print("\n")
+    print(f"{series_json['name']} ({series_json['imdbData']['Year']})\n")
 
 
 def confirm_quality(series_json):
@@ -82,4 +81,6 @@ def print_extract_links(json_seasons: dict, token, download_url):
         seasons[season] = season_episode_links
     with open('output.json', 'w', encoding='utf-8') as f:
         json.dump(seasons, f, indent=4)
-    print(seasons)
+    # print(seasons)
+    for key, values in seasons.items():
+        print(f'Season {key}: {len(values)} episodes')
