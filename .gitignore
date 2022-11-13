@@ -4,3 +4,4 @@ archive_json/
 venv/
 
 .env
+output.json

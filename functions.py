@@ -1,3 +1,5 @@
+import json
+
 # For reference a standard link would look like:
 # api_url/NAME/?id=_ID&token=TOKEN
 
@@ -65,14 +67,19 @@ def confirm_quality(series_json):
 
 def print_extract_links(json_seasons: dict, token, download_url):
     # Looping for total_seasons and generating downloadable links with token attached
+    seasons = dict()
     for season in json_seasons:
         episodes = json_seasons[season]["episodes"] #json_seasons= response["seasons"][quality]
 
-        links = list()
+        season_episode_links = list()
 
         for episode in episodes:
             formatted_link = f'{download_url}/{episode["name"]}?id={episode["_id"]}&token={token}'
-            links.append(formatted_link)
-        print(f"Season {season}:\n")
-        print(links)
-        print("\n\n")
+            season_episode_links.append(formatted_link)
+        # print(f"Season {season}:\n")
+        # print(season_episode_links)
+        # print("\n\n")
+        seasons[season] = season_episode_links
+    with open('output.json', 'w', encoding='utf-8') as f:
+        json.dump(seasons, f, indent=4)
+    print(seasons)
