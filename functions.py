@@ -55,10 +55,10 @@ def confirm_quality(series_json):
         try:
             choice = int(input('\nPlease choose the quality: '))
             if choice > len(series_json["quality"]): 
-                print("Please choose from above option!")
+                print("No choices with this number.")
                 continue
         except ValueError:
-            print("Please enter numbers only...")
+            print("This value must match an existing value.")
         except KeyboardInterrupt:
             raise SystemExit("Quit!")
         else:
