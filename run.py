@@ -48,7 +48,7 @@ def run(token):
 
     # Getting the series details, e.g. no. of seasons, all episodes
     print_series_data(series_json=response_json_series) # Printing the name of the series and year
-    print_extract_links(response_json_seasons, token) # NEED TO WORK ON THIS !!!!
+    print_extract_links(json_seasons=response_json_seasons, download_url=v.DOWNLOAD_API, token=token) # NEED TO WORK ON THIS !!!!
 
 if __name__ == '__main__':
     run(token=cache_token)

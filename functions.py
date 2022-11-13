@@ -1,4 +1,3 @@
-import variables as v
 # For reference a standard link would look like:
 # api_url/NAME/?id=_ID&token=TOKEN
 
@@ -64,15 +63,15 @@ def confirm_quality(series_json):
         else:
             return series_json["quality"][choice - 1]
 
-def print_extract_links(json_seasons: dict, token):
+def print_extract_links(json_seasons: dict, token, download_url):
     # Looping for total_seasons and generating downloadable links with token attached
     for season in json_seasons:
-        episodes = json_seasons[season]["episodes"]
+        episodes = json_seasons[season]["episodes"] #json_seasons= response["seasons"][quality]
 
         links = list()
 
         for episode in episodes:
-            formatted_link = f'{v.DOWNLOAD_API}/{episode["name"]}?id={episode["_id"]}&token={token}'
+            formatted_link = f'{download_url}/{episode["name"]}?id={episode["_id"]}&token={token}'
             links.append(formatted_link)
         print(f"Season {season}:\n")
         print(links)
