@@ -45,7 +45,8 @@ def add_bearer_to_token(token):
 
 def print_series_data(series_json: dict):
     print("\n")
-    print(f"{series_json['name']} ({series_json['imdbData']['Year']})\n")
+    year_start = series_json['imdbData']['Year'][:4]
+    print(f"{series_json['name']} ({year_start})\n")
 
 
 def confirm_quality(series_json):
