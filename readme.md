@@ -1,6 +1,6 @@
 # Simple scrapper
 
-## Currently supported only series scrapping
+> Currently supported only series scrapping
 ---
 
 ### To run
