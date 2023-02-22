@@ -50,7 +50,8 @@ def print_series_data(series_json: dict):
 
 
 def confirm_quality(series_json):
-    print("\nAvailable quality: ")
+    print_series_data(series_json=series_json)
+    print("Available quality: ")
     for index, q in enumerate(series_json["quality"], start=1): print(f'{index}. {q}')
     while True:
         try:
@@ -82,6 +83,7 @@ def print_extract_links(json_seasons: dict, token, download_url):
         seasons[season] = season_episode_links
     with open('output.json', 'w', encoding='utf-8') as f:
         json.dump(seasons, f, indent=4)
-    # print(seasons)
+    # Temp work for pointing to the written file
     for key, values in seasons.items():
         print(f'Season {key}: {len(values)} episodes')
+    print("Open -> /home/ashish/Contents/PythonScripts/playground/scrap_googolplex/output.json")
